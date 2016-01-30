@@ -16,6 +16,11 @@ public class Data {
     public static HashMap<String, ArrayList<String>> liaisonsExtensions;
 
     /**
+     * Données de configuration, externalisées dans un fichier.
+     */
+    public static HashMap<String, String> config;
+
+    /**
      * Initialise toutes les données nécessaires.
      */
     public static void initToutesLesDonnees() {
@@ -23,6 +28,13 @@ public class Data {
         initLiaisonsExtensions();
     }
 
+    /**
+     * Initialise les données de configuration.
+     */
+    public static void initConfig() {
+        config = new HashMap<>();
+    }
+    
     /**
      * Initialise les liaisons entre les extensions.
      */
