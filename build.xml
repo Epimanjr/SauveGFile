@@ -1,0 +1,33 @@
+<project default="compile">
+
+<target name="clean">
+	<delete dir="bin"/>
+	<delete dir="jar"/>
+</target>
+
+
+<target name="compile" depends="clean">
+	<mkdir dir="bin"/>
+	<javac srcdir="src" destdir="bin"/>
+</target>
+
+
+<target name="jar" depends="compile">
+	<mkdir dir="jar"/>
+	<jar destfile="jar/SauveGFile.jar" basedir="bin">
+		<manifest>
+			<attribute name="Main-Class" value="sauvegfile.SauveGFile"/>
+		</manifest>
+	</jar>
+</target>
+
+<target name="run">
+  <java classname="sauvegfile.Main" classpath="bin" fork="true"/>
+</target>
+
+
+<target name="runjar" depends="jar">
+	<java jar="jar/SauveGFile.jar" fork="true"/>
+</target>
+
+</project>
