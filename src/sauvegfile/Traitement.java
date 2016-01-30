@@ -1,5 +1,9 @@
 package sauvegfile;
 
+import java.io.File;
+import java.util.Set;
+import java.util.Iterator;
+
 /**
  * Classe de traitement.
  *
@@ -44,6 +48,35 @@ public class Traitement {
     }
 
     public void traiter(String google, String onedrive, String memoire) {
-
+        File f = new File(google + memoire);
+        for(File file : f.listFiles()) {
+            if(file.isDirectory()) {
+                // Récursivité
+                traiter(google, onedrive, memoire + file.getName() + "/");
+            } else {
+                // Traitement du fichier
+                Set set = Data.liaisonsExtensions.keySet();
+                Iterator it = set.iterator();
+                while(it.hasNext()) {
+                    String str = it.next().toString();
+                    if(file.getName().endsWith(str)) {
+                        boolean existeSurOneDrive = false;
+                        for(String extension : Data.liaisonsExtensions.get(str)) {
+                            String tmp = file.getName().replaceAll(str, extension);
+                            File fileOneDrive = new File(onedrive + memoire + tmp);
+                            if(fileOneDrive.exists()) {
+                                existeSurOneDrive = true;
+                                break;
+                            }
+                        }
+                        if(!existeSurOneDrive) {
+                            // Ecriture du path
+                            System.out.println(memoire + file.getName());
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
