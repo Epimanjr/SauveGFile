@@ -26,10 +26,6 @@ public class Traitement {
      */
     private String cheminVersOneDrive;
 
-    /**
-     * Memoire temporaire.
-     */
-    private String memoire="";
 
     /**
      * Créer un traitement.
@@ -44,7 +40,7 @@ public class Traitement {
 
 
     public void traiter() {
-        traiter(this.cheminVersGoogle, this.cheminVersOneDrive, this.memoire);
+        traiter(this.cheminVersGoogle, this.cheminVersOneDrive, "");
     }
 
     public void traiter(String google, String onedrive, String memoire) {
@@ -52,7 +48,7 @@ public class Traitement {
         for(File file : f.listFiles()) {
             if(file.isDirectory()) {
                 // Récursivité
-                traiter(google, onedrive, memoire + file.getName() + "/");
+                traiter(google, onedrive, memoire + "/" + file.getName());
             } else {
                 // Traitement du fichier
                 Set set = Data.liaisonsExtensions.keySet();
@@ -63,7 +59,7 @@ public class Traitement {
                         boolean existeSurOneDrive = false;
                         for(String extension : Data.liaisonsExtensions.get(str)) {
                             String tmp = file.getName().replaceAll(str, extension);
-                            File fileOneDrive = new File(onedrive + memoire + tmp);
+                            File fileOneDrive = new File(onedrive + memoire + "/" + tmp);
                             if(fileOneDrive.exists()) {
                                 existeSurOneDrive = true;
                                 break;
@@ -71,7 +67,7 @@ public class Traitement {
                         }
                         if(!existeSurOneDrive) {
                             // Ecriture du path
-                            System.out.println(memoire + file.getName());
+                            System.err.println(memoire + "/" + file.getName());
                         }
                         break;
                     }

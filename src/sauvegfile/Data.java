@@ -88,7 +88,7 @@ public class Data {
      *
      * @return Chemin
      */
-    public static String getCheminGoogle() throws MauvaisCheminException {
+    public static String cheminVersGoogle() throws MauvaisCheminException {
         return getChemin("cheminVersGoogle");
     }
 

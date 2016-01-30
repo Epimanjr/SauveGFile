@@ -1,2 +1,2 @@
-cheminVersGoogle=""
-cheminVersOneDrive=""
+cheminVersGoogle=>C:\Users\Maxime\Google Drive\Etudes\Miage\Semestre8
+cheminVersOneDrive=>C:\Users\Maxime\OneDrive\Etudes\Miage\Semestre8
